@@ -1,4 +1,4 @@
-from typing import Annotated
+from typing import Annotated, Sequence
 
 from fastapi import APIRouter, Depends
 
@@ -12,7 +12,7 @@ router = APIRouter(tags=["Users"])
 @router.get("/", response_model=list[UserOutSchema])
 async def get_all_users(
         user_service: Annotated[UserService, Depends(user_service_dep)]
-) -> list[UserOutSchema]:
+) -> Sequence[UserOutSchema]:
 
     users = await user_service.find_users()
     return users
@@ -25,4 +25,4 @@ async def create_user(
 ) -> UserOutSchema:
 
     created_user = await user_service.add_user(user)
-    return UserOutSchema.from_orm(created_user)
+    return created_user
