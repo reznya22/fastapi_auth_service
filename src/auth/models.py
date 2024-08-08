@@ -1,3 +1,5 @@
+from sqlalchemy.sql import expression
+
 from src.database import Base
 from sqlalchemy.orm import Mapped, mapped_column
 
@@ -9,4 +11,7 @@ class UserORM(Base):
     username: Mapped[str] = mapped_column(unique=True)
     email: Mapped[str] = mapped_column(unique=True)
     password: Mapped[str]
-    is_active: Mapped[bool] = mapped_column(default=True)
+    is_active: Mapped[bool] = mapped_column(
+        default=True,
+        server_default=expression.true(),
+    )
