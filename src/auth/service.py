@@ -14,7 +14,7 @@ class UserService:
         user_orm = UserORM(
             username=user.username,
             email=user.email,
-            password=hashed_password
+            password=hashed_password,
         )
         created_user = await self.user_repo.add_one(user_orm)
 

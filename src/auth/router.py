@@ -11,7 +11,7 @@ router = APIRouter(tags=["Users"])
 
 @router.get("/", response_model=list[UserOutSchema])
 async def get_all_users(
-        user_service: Annotated[UserService, Depends(user_service_dep)]
+    user_service: Annotated[UserService, Depends(user_service_dep)]
 ) -> Sequence[UserOutSchema]:
 
     users = await user_service.find_users()
@@ -20,8 +20,8 @@ async def get_all_users(
 
 @router.post("/", response_model=UserOutSchema)
 async def create_user(
-        user: UserInSchema,
-        user_service: Annotated[UserService, Depends(user_service_dep)]
+    user: UserInSchema,
+    user_service: Annotated[UserService, Depends(user_service_dep)],
 ) -> UserOutSchema:
 
     created_user = await user_service.add_user(user)

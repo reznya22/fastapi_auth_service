@@ -8,13 +8,13 @@ from sqlalchemy.orm import DeclarativeBase
 
 engine = create_async_engine(
     url=settings.DATABSE_URL,
-    echo=True
+    echo=True,
 )
 
 session_factory = async_sessionmaker(
     engine,
     expire_on_commit=False,
-    autoflush=False
+    autoflush=False,
 )
 
 
@@ -25,5 +25,5 @@ async def get_db() -> AsyncGenerator:
 
 class Base(DeclarativeBase):
     metadata = MetaData(
-        naming_convention=settings.naming_conventions
+        naming_convention=settings.naming_conventions,
     )
